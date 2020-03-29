@@ -5,6 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   </head>
   <body>
-    <div>Hello, world</div>
+    <div class="container">
+        <div class="header">
+          <label class="alignleft headerItem" for="hsearch">Todo List</label>
+          <input class="alignright headerItem" type="search" id="hsearch" placeholder="Search...">
+        </div>
+        <div class="content">
+          <div class="newTask">
+            <input type="text" id="newTaskInput" placeholder="New task...">
+            <button type="button" class="alignright" id="newTaskButton">ADD</button>
+          </div>
+          <div class="taskListContainer">
+            <div class="taskListHeader">
+              <p class="alignleft">Open</p> 
+              <select id="openTasksSelector" class="tasksSorter alignright">
+                <option value="date_desc">Date creation (Desc)</option>
+                <option value="date_asc">Date creation (Asc)</option>
+                <option value="text_asc">Text (Asc)</option>
+                <option value="text_desc">Text (Desc)</option>
+              </select>
+            </div>
+            <div class="taskList" id="openTasks"></div>
+              <button type="button" class="alignright" id="clearOpenTasksButton">Clear "Open" list</button> 
+          </div>
+
+          <div class="taskListContainer">
+            <div class="taskListHeader">
+              <p class="alignleft">Done</p> 
+              <select id="doneTasksSelector" class="tasksSorter alignright">
+                <option value="date_desc">Date creation (Desc)</option>
+                <option value="date_asc">Date creation (Asc)</option>
+                <option value="text_asc">Text (Asc)</option>
+                <option value="text_desc">Text (Desc)</option>
+              </select>
+            </div>
+            <div class="taskList" id="doneTasks"> </div>
+              <button type="button" class="alignright" id="clearDoneTasksButton">Clear "Open" list</button> 
+          </div>
+      </div>
+    </div>
   </body>
 </html>

@@ -1,3 +1,143 @@
-div {
-  color: blue;
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  margin: auto;
+  font-family: 'Ultra', sans-serif;   
+	font-size: 18px;
+}
+
+.header {
+  display: flex;
+  height: 2em;
+  padding: 0.1em 10%;
+  align-items: center;
+  background: #1abc9c;
+  color: white;
+}
+
+.headerItem {
+  width: 30%;
+}
+
+.content {
+  padding: 5% 10%;
+}
+
+.alignleft {
+	float: left;
+}
+
+.alignright {
+  float: right;
+  margin-left: auto;
+}
+
+input, select {
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid gray;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance:none;
+}
+
+select {
+  border-bottom: 1px solid gray;
+}
+
+.header input {
+  border-bottom: 1px solid white;
+  color: white;
+}
+
+.header ::placeholder {
+  color: white;
+}
+
+.taskListContainer{
+padding-top: 2.5em;
+}
+
+
+.newTask ::placeholder {
+  color: gray;
+}
+
+.newTask {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  padding: 3%;
+  background-color: transparent;
+  border: none;
+  transition-duration: 0.2s;
+}
+
+.newTask button {
+  border-radius: 0.3em;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.taskListHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* margin: auto; */
+}
+
+.taskList button{
+  border-bottom: 1px solid gray;
+}
+
+.taskItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5em 0;
+  padding: 0 1em;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.deleteButton{
+  display: none;
+}
+
+.taskItem:hover .deleteButton {
+  display: block;
+  border: none;
+  background-image: url('https://image.flaticon.com/icons/svg/2089/2089743.svg');
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: center;
+}
+
+.taskItem:hover .timeBlock {
+  transition-duration: 0.3s;
+  padding-right: 1em;
+  border-right: 2px solid gray;
+}
+
+.taskItem:hover .deleteButton:hover {
+  background-image: url('https://image.flaticon.com/icons/svg/2089/2089657.svg');
+}
+
+.timeBlock {
+  display: flexs;
+  font-size: 14px;
+}
+
+.startTimeText{
+  color: gray;
 }
