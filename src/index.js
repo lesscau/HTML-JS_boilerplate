@@ -66,6 +66,7 @@ function createTaskElement(task) {
   doneCheckbox.checked = task.done;
   taskElem.appendChild(doneCheckbox);
   doneCheckbox.onchange = event => handleTaskCheckbox(event);
+
   let paragraph = document.createElement('p');
   paragraph.textContent = task.text;
   taskElem.appendChild(paragraph);
@@ -81,6 +82,7 @@ function createTaskElement(task) {
   timeBlock.appendChild(startTimeElem);
   let endTimeElem = document.createElement('p');
   endTimeElem.className = 'endTimeText';
+  endTimeElem.textContent = task.endTime;
   timeBlock.appendChild(endTimeElem);
 
   let deleteButton = document.createElement('button');
@@ -109,8 +111,8 @@ function handleTextEdit(paragraph, taskElem, timeBlock) {
       taskElem.removeChild(input);
       taskElem.insertBefore(paragraph, timeBlock);
     }
+    updateLocalStorage();
   });
-  updateLocalStorage();
 }
 
 function handleTaskCheckbox(event) {
@@ -143,11 +145,11 @@ function sortTasks(taskList, mode) {
   switch (mode) {
     case 'date_asc':
       return [...taskList].sort((a, b) =>
-        getStartTime(a).localeCompare(getStartTime(b)),
+        getLastTime(a).localeCompare(getLastTime(b)),
       );
     case 'date_desc':
       return [...taskList].sort((a, b) =>
-        getStartTime(b).localeCompare(getStartTime(a)),
+      getLastTime(b).localeCompare(getLastTime(a)),
       );
     case 'text_asc':
       return [...taskList].sort((a, b) => getText(b).localeCompare(getText(a)));
@@ -182,6 +184,10 @@ function getEndTime(task) {
   return task.querySelector('.endTimeText').textContent;
 }
 
+function getLastTime(task) {
+  return getEndTime(task) ? getEndTime(task) : getStartTime(task);
+}
+
 function getText(task) {
   return task.querySelector('p').textContent;
 }
@@ -212,9 +218,9 @@ function restoreFromLocalStorage() {
   openTasks.forEach(task => createTaskElement(task));
   doneTasks.forEach(task => createTaskElement(task));
 
-  localStorage
-    .getItem('selectors')
-    .split(',')
+  let selectors = localStorage.getItem('selectors') || "date_desc";
+
+  selectors.split(',')
     .forEach((selector, index) => (tasksSorters[index].value = selector));
 }
 
