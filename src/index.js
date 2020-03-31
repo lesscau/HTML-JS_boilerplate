@@ -3,10 +3,20 @@ import './style.css';
 class Task {
   constructor(text) {
     this.text = text;
-    this.startTime = new Date().toLocaleTimeString();
+    this.startTime = getFormattedDate();
     this.endTime = null;
     this.done = false;
   }
+}
+
+function getFormattedDate(){
+  let m = new Date();
+  return m.getUTCFullYear() + "/" +
+  ("0" + (m.getUTCMonth()+1)).slice(-2) + "/" +
+  ("0" + m.getUTCDate()).slice(-2) + " " +
+  ("0" + m.getUTCHours()).slice(-2) + ":" +
+  ("0" + m.getUTCMinutes()).slice(-2) + ":" +
+  ("0" + m.getUTCSeconds()).slice(-2);
 }
 
 const openTaskListElement = document.querySelector('#openTasks');
@@ -46,7 +56,6 @@ function handleTaskCreation() {
   newTaskInputElement.value = '';
   const task = new Task(taskText);
   let taskJson = JSON.stringify(task);
-  console.log(taskJson);
   createTaskElement(task);
   updateLocalStorage();
 }
@@ -120,7 +129,7 @@ function handleTaskCheckbox(event) {
   if (event.target.checked) {
     task.querySelector(
       '.endTimeText',
-    ).textContent = new Date().toLocaleTimeString();
+    ).textContent = getFormattedDate();
     doneTaskListElement.appendChild(task);
   } else {
     task.querySelector('.endTimeText').textContent = '';
@@ -152,9 +161,9 @@ function sortTasks(taskList, mode) {
       getLastTime(b).localeCompare(getLastTime(a)),
       );
     case 'text_asc':
-      return [...taskList].sort((a, b) => getText(b).localeCompare(getText(a)));
-    case 'text_desc':
       return [...taskList].sort((a, b) => getText(a).localeCompare(getText(b)));
+    case 'text_desc':
+      return [...taskList].sort((a, b) => getText(b).localeCompare(getText(a)));
   }
 }
 
